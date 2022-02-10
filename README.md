@@ -12,7 +12,7 @@
 
 A utility that transforms a [style-dictionary](https://amzn.github.io/style-dictionary/#/) object into something [Figma Tokens plugin](https://www.figma.com/community/plugin/843461159747178978) understands.
 
-Used by Design Systems in [Backlight](https://backlight.dev) using design tokens in [style-dictionary](https://amzn.github.io/style-dictionary/) that can be sync into Figma via the [Figma Tokens plugin](https://www.figma.com/community/plugin/843461159747178978).
+Used by Design Systems in [Backlight](https://backlight.dev) using design tokens in [style-dictionary](https://amzn.github.io/style-dictionary/) that can be synced into Figma via the [Figma Tokens plugin](https://www.figma.com/community/plugin/843461159747178978).
 
 ## Features
 
