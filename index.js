@@ -1,5 +1,5 @@
-export * from './src/mark-tokenset.js';
-export * from './src/trim-name.js';
-export * from './src/trim-value.js';
-export * from './src/use-ref-value.js';
-export * as default from './src/style-dictionary-to-figma.js';
+export { markTokenset } from './src/mark-tokenset.js';
+export { trimName } from './src/trim-name.js';
+export { trimValue } from './src/trim-value.js';
+export { useRefValue } from './src/use-ref-value.js';
+export { default } from './src/style-dictionary-to-figma.js';

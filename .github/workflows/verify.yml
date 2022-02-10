@@ -20,7 +20,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - uses: microsoft/playwright-github-action@v1
+      - name: Install chromium
+        run: npx playwright install-deps chromium
 
       - name: Test
         run: npm run test

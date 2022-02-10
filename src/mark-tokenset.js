@@ -1,14 +1,29 @@
+/**
+ * @typedef {import('./style-dictionary-to-figma.js').Obj} Obj
+ */
+
+/**
+ * @param {Obj} obj
+ * @returns {Obj}
+ */
 export function markTokenset(obj) {
   const _obj = { ...obj };
   Object.keys(_obj).forEach(key => {
     if (typeof _obj[key] === 'object') {
-      Object.keys(_obj[key]).forEach(_key => {
-        if (_key === 'tokenset') {
-          if (typeof _obj[_obj[key][_key]] !== 'object') {
-            _obj[_obj[key][_key]] = {};
+      // typeof check so we know it's an object
+      const nestedObj = /** @type {Obj} */ (_obj[key]);
+      Object.keys(nestedObj).forEach(nestedKey => {
+        if (nestedKey === 'tokenset') {
+          // tokenset value may only be string
+          const tokenset = /** @type {string} */ (nestedObj[nestedKey]);
+          if (typeof _obj[tokenset] !== 'object') {
+            _obj[tokenset] = {};
           }
-          _obj[_obj[key][_key]][key] = _obj[key];
-          delete _obj[key][_key];
+          /** @type {Obj} */ (_obj[tokenset])[key] = nestedObj;
+
+          // ignore otherwise it mucks up the parenths needed for JSDoc typecast
+          // prettier-ignore
+          delete (/** @type {Obj} */ (_obj[key])[nestedKey]);
           delete _obj[key];
         }
       });
