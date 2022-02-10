@@ -12,6 +12,8 @@
 
 A utility that transforms a [style-dictionary](https://amzn.github.io/style-dictionary/#/) object into something [Figma Tokens plugin](https://www.figma.com/community/plugin/843461159747178978) understands.
 
+Used by Design Systems in [Backlight](https://backlight.dev) that are using design tokens in [style-dictionary](https://amzn.github.io/style-dictionary/) that can be imported into Figma via the [Figma Tokens plugin](https://www.figma.com/community/plugin/843461159747178978).
+
 ## Features
 
 - Allows marking a category as a custom tokenset so that it will appear as a separate tokenset in Figma. This is useful if you want to combine many base tokens into a "global" set for example.
