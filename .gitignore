@@ -13,3 +13,5 @@ npm-debug.log
 
 ## temp folders
 /coverage/
+
+index.cjs
