@@ -11,11 +11,13 @@
   "type": "module",
   "main": "index.js",
   "files": [
+    "index.cjs",
     "index.js",
     "index.d.ts",
     "src/**/*"
   ],
   "scripts": {
+    "build:cjs": "rollup index.js --file index.cjs --format cjs --plugin rollup-plugin-cleanup",
     "build:types": "tsc -p tsconfig.build.types.json",
     "format": "npm run format:eslint && npm run format:prettier",
     "format:eslint": "eslint --ext .js,.html . --fix",
@@ -25,7 +27,7 @@
     "lint:prettier": "prettier \"**/*.js\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
     "lint:types": "tsc",
     "prepare": "husky install",
-    "release": "npm run build:types && changeset publish",
+    "release": "run-p build:* && changeset publish",
     "test": "web-test-runner --coverage",
     "test:view:coverage": "cd coverage/lcov-report && npx http-server -o -c-1",
     "test:watch": "web-test-runner --watch"
@@ -45,6 +47,8 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
     "prettier-package-json": "^2.6.0",
+    "rollup": "^2.67.3",
+    "rollup-plugin-cleanup": "^3.2.1",
     "typescript": "^4.5.5"
   },
   "keywords": [
@@ -53,7 +57,8 @@
     "style-dictionary"
   ],
   "exports": {
-    ".": "./index.js"
+    "import": "./index.js",
+    "require": "./index.cjs"
   },
   "prettier": {
     "printWidth": 100,
