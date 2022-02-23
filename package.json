@@ -36,7 +36,6 @@
     "@changesets/cli": "^2.20.0",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@open-wc/eslint-config": "^7.0.0",
-    "@types/parse-author": "^2.0.1",
     "@web/test-runner": "^0.13.27",
     "@web/test-runner-playwright": "^0.8.8",
     "eslint": "^7.32.0",
@@ -46,7 +45,7 @@
     "lint-staged": "^12.3.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
-    "prettier-package-json": "^2.6.0",
+    "prettier-package-json": "^2.6.3",
     "rollup": "^2.67.3",
     "rollup-plugin-cleanup": "^3.2.1",
     "typescript": "^4.5.5"
