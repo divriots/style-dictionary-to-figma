@@ -13,7 +13,6 @@
 
 # Style Dictionary To Figma
 
-
 A utility that transforms a [style-dictionary](https://amzn.github.io/style-dictionary/#/) object into something [Figma Tokens plugin](https://www.figma.com/community/plugin/843461159747178978) understands.
 
 Used by Design Systems in [Backlight](https://backlight.dev) using design tokens in [style-dictionary](https://amzn.github.io/style-dictionary/) that can be synced into Figma via the [Figma Tokens plugin](https://www.figma.com/community/plugin/843461159747178978).
@@ -32,10 +31,10 @@ npm i @divriots/style-dictionary-to-figma
 ```
 
 ```js
-import styleDictionaryToFigma from '@divriots/style-dictionary-to-figma';
+import { transform } from '@divriots/style-dictionary-to-figma';
 
 const sdObject = { ... };
-const figmaObj = styleDictionaryToFigma(sdObject);
+const figmaObj = transform(sdObject);
 ```
 
 In case you want its separate counterparts, you can import them separately.
@@ -53,18 +52,32 @@ Once you transformed the object to Figma, a recommendation is to push this to Gi
 
 ## Use in [Backlight](https://backlight.dev/) / [Style-dictionary](https://amzn.github.io/style-dictionary/#/)
 
-Simply import the `styleDictionaryToFigma` utility and create a style-dictionary formatter:
+Import the `transform` utility and create a style-dictionary formatter:
 
 ```js
-import styleDictionaryToFigma from '@divriots/style-dictionary-to-figma';
+const { transform } = require('@divriots/style-dictionary-to-figma');
+const StyleDictionary = require('style-dictionary');
 
-export default {
+StyleDictionary.registerFormat({
+  name: 'figmaTokensPlugin',
+  formatter: ({ dictionary }) => {
+    const transformedTokens = transform(dictionary.tokens);
+    return JSON.stringify(transformedTokens, null, 2);
+  },
+});
+```
+
+Or you can also put the formatter directly into the config without registering it imperatively:
+
+```js
+const { transform } = require('@divriots/style-dictionary-to-figma');
+
+module.exports = {
   source: ['**/*.tokens.json'],
   format: {
-    figmaTokensPluginJson: opts => {
-      const { dictionary } = opts;
-      const parsedTokens = styleDictionaryToFigma(dictionary.tokens);
-      return JSON.stringify(parsedTokens, null, 2);
+    figmaTokensPlugin: ({ dictionary }) => {
+      const transformedTokens = transform(dictionary.tokens);
+      return JSON.stringify(transformedTokens, null, 2);
     },
   },
   platforms: {
@@ -74,7 +87,7 @@ export default {
       files: [
         {
           destination: 'tokens.json',
-          format: 'figmaTokensPluginJson',
+          format: 'figmaTokensPlugin',
         },
       ],
     },

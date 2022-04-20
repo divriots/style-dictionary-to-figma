@@ -11,6 +11,6 @@ import { useRefValue } from './use-ref-value.js';
  * @param {Obj} obj
  * @returns {Obj}
  */
-export default function styleDictionaryToFigma(obj) {
+export function transform(obj) {
   return markTokenset(trimName(useRefValue(trimValue(obj))));
 }
