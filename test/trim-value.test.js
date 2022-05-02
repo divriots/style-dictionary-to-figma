@@ -55,4 +55,36 @@ describe('trim-value', () => {
 
     expect(trimmedObj).to.eql(expectedObj);
   });
+
+  it('trims away any .value from reference values in nested objects when value is object', () => {
+    const obj = {
+      shadow: {
+        value: {
+          x: '0',
+          y: '1',
+          blur: '2',
+          spread: '0',
+          color: '{color.accent.base.value}',
+          type: 'dropShadow',
+        },
+      },
+    };
+
+    const expectedObj = {
+      shadow: {
+        value: {
+          x: '0',
+          y: '1',
+          blur: '2',
+          spread: '0',
+          color: '{color.accent.base}',
+          type: 'dropShadow',
+        },
+      },
+    };
+
+    const trimmedObj = trimValue(obj);
+
+    expect(trimmedObj).to.eql(expectedObj);
+  });
 });
