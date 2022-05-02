@@ -1,5 +1,11 @@
 # @divriots/style-dictionary-to-figma
 
+## 0.1.2
+
+### Patch Changes
+
+- 31493c5: Fixes trimValue when used on values that are objects.
+
 ## 0.1.1
 
 ### Patch Changes
