@@ -13,7 +13,8 @@ export function trimName(obj) {
     if (key === 'name') {
       delete newObj[key];
     } else if (typeof newObj[key] === 'object') {
-      newObj[key] = trimName(/** @type {Obj} */ (newObj[key]));
+      const newValue = trimName(/** @type {Obj} */ (newObj[key]));
+      newObj[key] = Array.isArray(newObj[key]) ? Object.values(newValue) : newValue;
     }
   });
 

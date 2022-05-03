@@ -19,7 +19,8 @@ export function trimValue(obj, isValueObj = false) {
           newObj[key] = val.replace('.value', '');
         }
       } else if (typeof newObj[key] === 'object') {
-        newObj[key] = trimValue(/** @type {Obj} */ (newObj[key]), true);
+        const newValue = trimValue(/** @type {Obj} */ (newObj[key]), true);
+        newObj[key] = Array.isArray(newObj[key]) ? Object.values(newValue) : newValue;
       }
     } else if (typeof newObj[key] === 'object') {
       newObj[key] = trimValue(/** @type {Obj} */ (newObj[key]));
