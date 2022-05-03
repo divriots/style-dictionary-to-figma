@@ -17,6 +17,28 @@ describe('style-dictionary-to-figma', () => {
           },
         },
       },
+      boxShadow: {
+        small: {
+          value: [
+            {
+              x: '0',
+              y: '1',
+              blur: '2',
+              spread: '0',
+              color: '{color.accent.base.value}',
+              type: 'dropShadow',
+            },
+            {
+              x: '0',
+              y: '2',
+              blur: '4',
+              spread: '0',
+              color: '{color.accent.base.value}',
+              type: 'dropShadow',
+            },
+          ],
+        },
+      },
     };
 
     const expectedObj = {
@@ -31,6 +53,28 @@ describe('style-dictionary-to-figma', () => {
               value: '{colors.accent.base}',
             },
           },
+        },
+      },
+      boxShadow: {
+        small: {
+          value: [
+            {
+              x: '0',
+              y: '1',
+              blur: '2',
+              spread: '0',
+              color: '{color.accent.base}',
+              type: 'dropShadow',
+            },
+            {
+              x: '0',
+              y: '2',
+              blur: '4',
+              spread: '0',
+              color: '{color.accent.base}',
+              type: 'dropShadow',
+            },
+          ],
         },
       },
     };

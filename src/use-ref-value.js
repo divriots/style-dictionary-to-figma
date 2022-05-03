@@ -12,7 +12,8 @@ export function useRefValue(obj) {
     if (key === 'original') {
       newObj.value = /** @type {Obj} */ (newObj[key]).value;
     } else if (typeof newObj[key] === 'object') {
-      newObj[key] = useRefValue(/** @type {Obj} */ (newObj[key]));
+      const newValue = useRefValue(/** @type {Obj} */ (newObj[key]));
+      newObj[key] = Array.isArray(newObj[key]) ? Object.values(newValue) : newValue;
     }
   });
   return newObj;
