@@ -1,5 +1,11 @@
 # @divriots/style-dictionary-to-figma
 
+## 0.1.3
+
+### Patch Changes
+
+- ff5d591: Keeps an array-type value as an array. This is useful with boxShadows that can have multiple stacked shadows in a single token.
+
 ## 0.1.2
 
 ### Patch Changes
