@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai';
-import styleDictionaryToFigma from '../src/style-dictionary-to-figma.js';
+import { transform } from '../src/style-dictionary-to-figma.js';
 
 describe('style-dictionary-to-figma', () => {
   it('transforms style dictionary tokens object to a figma tokens plugin compatible object', () => {
@@ -79,7 +79,7 @@ describe('style-dictionary-to-figma', () => {
       },
     };
 
-    const transformedObj = styleDictionaryToFigma(obj);
+    const transformedObj = transform(obj);
     expect(transformedObj).to.eql(expectedObj);
   });
 });
