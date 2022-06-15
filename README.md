@@ -17,6 +17,9 @@ A utility that transforms a [style-dictionary](https://amzn.github.io/style-dict
 
 Used by Design Systems in [Backlight](https://backlight.dev) using design tokens in [style-dictionary](https://amzn.github.io/style-dictionary/) that can be synced into Figma via the [Figma Tokens plugin](https://www.figma.com/community/plugin/843461159747178978).
 
+> The tool, at the moment, assumes usage of the Sync feature of Figma Tokens Plugin.
+> The JSON output is catered to this as it is a single file containing the tokensets information.
+
 ## Features
 
 - Allows marking a category as a custom tokenset so that it will appear as a separate tokenset in Figma. This is useful if you want to combine many base tokens into a "global" set for example.
@@ -98,3 +101,11 @@ module.exports = {
 This spits out a file `/tokens/tokens.json` which Figma Tokens plugin can import (e.g. through GitHub).
 
 Since [Backlight](https://backlight.dev/) has [GitHub](https://github.com/) and [Style-Dictionary](https://amzn.github.io/style-dictionary/#/) integration out of the box, this process is very simple.
+
+## Create a JSON for each tokenset
+
+Perhaps you'd like to use this tool to generate a separate JSON file for each tokenset,
+which you can then manually paste into the Figma Tokens Plugin JSON view.
+For example, when you're not using the Figma Tokens Plugin Sync feature.
+
+For this, [refer to this code snippet from this issue](https://github.com/divriots/style-dictionary-to-figma/issues/15#issuecomment-1127797022).
