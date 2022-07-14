@@ -1,5 +1,11 @@
 # @divriots/style-dictionary-to-figma
 
+## 0.2.1
+
+### Patch Changes
+
+- c30d4c1: Allow passing ignoreUseRefValue boolean metadata as a sibling to the token value property. It will use the resolved value rather than using the original reference value after conversion when this is set to true.
+
 ## 0.2.0
 
 ### Minor Changes
