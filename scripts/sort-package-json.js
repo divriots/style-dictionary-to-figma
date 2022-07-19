@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { exec } from 'child_process';
-import { createRequire } from 'module';
+import mod from 'module';
 
-const require = createRequire(import.meta.url);
+const require = mod.createRequire(import.meta.url);
 const defaults = require('prettier-package-json/build/defaultOptions');
 
 const currOrder = /** @type {[]} */ (defaults.defaultOptions.keyOrder);

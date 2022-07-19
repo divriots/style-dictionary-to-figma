@@ -33,22 +33,22 @@
     "test:watch": "web-test-runner --watch"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.20.0",
+    "@changesets/cli": "^2.23.0",
     "@esm-bundle/chai": "^4.3.4-fix.0",
     "@open-wc/eslint-config": "^7.0.0",
-    "@web/test-runner": "^0.13.27",
-    "@web/test-runner-playwright": "^0.8.8",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.4",
+    "@web/test-runner": "^0.13.31",
+    "@web/test-runner-playwright": "^0.8.9",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
     "husky": "^7.0.4",
-    "lint-staged": "^12.3.3",
+    "lint-staged": "^13.0.3",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.5.1",
-    "prettier-package-json": "^2.6.3",
-    "rollup": "^2.67.3",
+    "prettier": "^2.7.1",
+    "prettier-package-json": "^2.6.4",
+    "rollup": "^2.77.0",
     "rollup-plugin-cleanup": "^3.2.1",
-    "typescript": "^4.5.5"
+    "typescript": "^4.7.4"
   },
   "keywords": [
     "design tokens",

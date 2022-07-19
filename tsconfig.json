@@ -4,6 +4,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "lib": ["es2017", "dom"],
+    "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "checkJs": true,
     "noEmit": true,
