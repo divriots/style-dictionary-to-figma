@@ -1,3 +1,5 @@
+import { isObject } from './utils/isObject.js';
+
 /**
  * @typedef {import('./style-dictionary-to-figma.js').Obj} Obj
  * @typedef {string|Object|Array<unknown>|number} Value
@@ -35,7 +37,7 @@ export function useRefValue(obj) {
       if (isRefValue(originalValue)) {
         newObj.value = /** @type {Obj} */ (newObj[key]).value;
       }
-    } else if (typeof newObj[key] === 'object') {
+    } else if (isObject(newObj[key]) || Array.isArray(newObj[key])) {
       const newValue = useRefValue(/** @type {Obj} */ (newObj[key]));
       newObj[key] = Array.isArray(newObj[key]) ? Object.values(newValue) : newValue;
     }

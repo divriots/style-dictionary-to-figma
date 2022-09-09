@@ -22,7 +22,24 @@ Used by Design Systems in [Backlight](https://backlight.dev) using design tokens
 
 ## Features
 
-- Allows marking a category as a custom tokenset so that it will appear as a separate tokenset in Figma. This is useful if you want to combine many base tokens into a "global" set for example.
+- **Mandatory action required**: Supports marking a category as a custom tokenset so that it will appear as a separate tokenset in Figma. This is useful if you want to combine many base tokens into a "global" set for example and a mandatory step for Figma Tokens Plugin currently, or your references will not work. You can configure it like so:
+
+  ```json
+  {
+    "color": {
+      "tokenset": "global",
+      "primary": {
+        "base": {
+          "type": "color",
+          "value": "#14b8a6"
+        }
+      }
+    }
+  }
+  ```
+
+  `color.primary.base` token will appear under `global` tokenset now in the plugin.
+
 - Trims `.value` from reference values as Figma Tokens plugin does not use this suffix.
 - Trims the `name` properties from tokens since Figma Tokens plugin uses this property to name its tokens, however, without a name property it creates its own naming/nesting by the object structure which is way nicer.
 - Use the reference values rather than its resolved values. Put `ignoreUseRefValue: true` as a sibling property to the value prop if you want to make an exception and keep it as a resolved value.
