@@ -1,5 +1,11 @@
 # @divriots/style-dictionary-to-figma
 
+## 0.3.1
+
+### Patch Changes
+
+- 1c0ee01: Do proper isObject check (typeof null and Array are also 'object') where needed. Fixes bug with metadata props with type Array getting altered by trimValue to become Objects.
+
 ## 0.3.0
 
 ### Minor Changes
