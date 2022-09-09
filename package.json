@@ -1,6 +1,6 @@
 {
   "name": "@divriots/style-dictionary-to-figma",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A utility that transforms a style-dictionary object into something Figma Tokens plugin understands",
   "license": "MIT",
   "author": "divRiots <joren@divriots.com>",
