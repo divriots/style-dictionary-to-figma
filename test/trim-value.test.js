@@ -139,4 +139,37 @@ describe('trim-value', () => {
 
     expect(trimmedObj).to.eql(expectedObj);
   });
+
+  it('keeps arbitrary metadata intact', () => {
+    const obj = {
+      core: {
+        color: {
+          primary: {
+            base: {
+              type: 'color',
+              value: '#14b8a6',
+              path: ['core', 'color', 'primary', 'base'],
+            },
+          },
+        },
+      },
+    };
+
+    const expectedObj = {
+      core: {
+        color: {
+          primary: {
+            base: {
+              type: 'color',
+              value: '#14b8a6',
+              path: ['core', 'color', 'primary', 'base'],
+            },
+          },
+        },
+      },
+    };
+
+    const transformedObj = trimValue(obj);
+    expect(transformedObj).to.eql(expectedObj);
+  });
 });
