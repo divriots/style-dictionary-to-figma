@@ -43,6 +43,13 @@ Used by Design Systems in [Backlight](https://backlight.dev) using design tokens
 - Trims `.value` from reference values as Figma Tokens plugin does not use this suffix.
 - Trims the `name` properties from tokens since Figma Tokens plugin uses this property to name its tokens, however, without a name property it creates its own naming/nesting by the object structure which is way nicer.
 - Use the reference values rather than its resolved values. Put `ignoreUseRefValue: true` as a sibling property to the value prop if you want to make an exception and keep it as a resolved value.
+- Allow passing some optional options to adjust the object conversion:
+
+  - cleanMeta, if `true`, will clean up some of the meta info that style-dictionary creates, which Figma Tokens plugin doesn't care about. Can also pass a `string[]` if you want to configure a blacklist of meta props that you want to filter out yourself
+
+  ```js
+  transform(obj, { cleanMeta: ['foo', 'bar'] });
+  ```
 
 ## Usage
 
@@ -65,6 +72,7 @@ import {
   trimName,
   useRefValue,
   markTokenset,
+  cleanMeta,
 } from '@divriots/style-dictionary-to-figma';
 ```
 
