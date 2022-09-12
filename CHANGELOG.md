@@ -1,5 +1,11 @@
 # @divriots/style-dictionary-to-figma
 
+## 0.3.2
+
+### Patch Changes
+
+- f9cf466: Allow passing an options object, for example `cleanMeta`, to clean unwanted meta props from the style-dictionary object.
+
 ## 0.3.1
 
 ### Patch Changes
