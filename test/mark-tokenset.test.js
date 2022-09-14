@@ -129,4 +129,57 @@ describe('mark-tokenset', () => {
     const marked = markTokenset(obj);
     expect(marked).to.eql(expectedObj);
   });
+
+  it('allows naming your tokenset the same as your upper prop key', () => {
+    const obj = {
+      nested: {
+        tokenset: 'nested',
+        doubleNested: {
+          tripleNested: {
+            type: 'color',
+            value: '{colors.accent.base.value}',
+          },
+        },
+        anotherDoubleNested: {
+          type: 'color',
+          value: '{colors.accent.secondary.value}',
+        },
+      },
+      foo: {
+        tokenset: 'foo',
+        bar: {
+          type: 'color',
+          value: '{colors.accent.light.value}',
+        },
+      },
+    };
+
+    const expectedObj = {
+      nested: {
+        nested: {
+          doubleNested: {
+            tripleNested: {
+              type: 'color',
+              value: '{colors.accent.base.value}',
+            },
+          },
+          anotherDoubleNested: {
+            type: 'color',
+            value: '{colors.accent.secondary.value}',
+          },
+        },
+      },
+      foo: {
+        foo: {
+          bar: {
+            type: 'color',
+            value: '{colors.accent.light.value}',
+          },
+        },
+      },
+    };
+
+    const marked = markTokenset(obj);
+    expect(marked).to.eql(expectedObj);
+  });
 });

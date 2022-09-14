@@ -18,15 +18,25 @@ export function markTokenset(obj) {
         if (nestedKey === 'tokenset') {
           // tokenset value may only be string
           const tokenset = /** @type {string} */ (nestedObj[nestedKey]);
-          if (!isObject(_obj[tokenset])) {
-            _obj[tokenset] = {};
-          }
-          /** @type {Obj} */ (_obj[tokenset])[key] = nestedObj;
-
           // ignore otherwise it mucks up the parenths needed for JSDoc typecast
           // prettier-ignore
           delete (/** @type {Obj} */ (_obj[key])[nestedKey]);
-          delete _obj[key];
+
+          if (!isObject(_obj[tokenset])) {
+            _obj[tokenset] = {};
+          }
+
+          if (tokenset === key) {
+            // if tokenset is the same as the upper key, we will get
+            // { key: key: {} }, so copy the object and move it a layer deeper
+            const copy = _obj[key];
+            delete _obj[key];
+            _obj[key] = {};
+            /** @type {Obj} */ (_obj[key])[key] = copy;
+          } else {
+            /** @type {Obj} */ (_obj[tokenset])[key] = nestedObj;
+            delete _obj[key];
+          }
         }
       });
     }
