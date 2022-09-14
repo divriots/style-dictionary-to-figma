@@ -1,5 +1,40 @@
 # @divriots/style-dictionary-to-figma
 
+## 0.3.3
+
+### Patch Changes
+
+- 2c9be59: Allow tokensets to be the same name as the upper most keys in the tokens object, e.g.:
+
+  ```json
+  {
+    "core": {
+      "tokenset": "core",
+      "color": {
+        "value": "#ff0000",
+        "type": "color"
+      }
+    }
+  }
+  ```
+
+  will become
+
+  ```json
+  {
+    "core": {
+      "core": {
+        "color": {
+          "value": "#ff0000",
+          "type": "color"
+        }
+      }
+    }
+  }
+  ```
+
+  so that Figma Tokens plugin picks it up properly.
+
 ## 0.3.2
 
 ### Patch Changes
