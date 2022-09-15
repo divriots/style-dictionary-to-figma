@@ -47,11 +47,16 @@ describe('mark-tokenset', () => {
 
     const expectedObj = {
       tokenset: 'global',
-      nested: {
-        doubleNested: {
-          tripleNested: {
-            type: 'color',
-            value: '{colors.accent.base.value}',
+      // since no valid tokenset is inside "nested" obj,
+      // it will put this inside "global",
+      // see also last tokenset tests in this file.
+      global: {
+        nested: {
+          doubleNested: {
+            tripleNested: {
+              type: 'color',
+              value: '{colors.accent.base.value}',
+            },
           },
         },
       },
@@ -70,12 +75,14 @@ describe('mark-tokenset', () => {
     };
 
     const expectedObj2 = {
-      nested: {
-        doubleNested: {
-          tripleNested: {
-            tokenset: 'global',
-            type: 'color',
-            value: '{colors.accent.base.value}',
+      global: {
+        nested: {
+          doubleNested: {
+            tripleNested: {
+              tokenset: 'global',
+              type: 'color',
+              value: '{colors.accent.base.value}',
+            },
           },
         },
       },
@@ -181,5 +188,161 @@ describe('mark-tokenset', () => {
 
     const marked = markTokenset(obj);
     expect(marked).to.eql(expectedObj);
+  });
+
+  describe('default tokenset', () => {
+    it('puts token groups under a "global" tokenset by default', () => {
+      const obj = {
+        nested: {
+          doubleNested: {
+            tripleNested: {
+              type: 'color',
+              value: '{colors.accent.base.value}',
+            },
+          },
+          anotherDoubleNested: {
+            type: 'color',
+            value: '{colors.accent.secondary.value}',
+          },
+        },
+        foo: {
+          tokenset: 'foo',
+          bar: {
+            type: 'color',
+            value: '{colors.accent.light.value}',
+          },
+        },
+      };
+
+      const expectedObj = {
+        global: {
+          nested: {
+            doubleNested: {
+              tripleNested: {
+                type: 'color',
+                value: '{colors.accent.base.value}',
+              },
+            },
+            anotherDoubleNested: {
+              type: 'color',
+              value: '{colors.accent.secondary.value}',
+            },
+          },
+        },
+        foo: {
+          foo: {
+            bar: {
+              type: 'color',
+              value: '{colors.accent.light.value}',
+            },
+          },
+        },
+      };
+
+      const marked = markTokenset(obj);
+      expect(marked).to.eql(expectedObj);
+    });
+
+    it('allows specifying defaultTokenset option to set default tokenset mapping', () => {
+      const obj = {
+        nested: {
+          doubleNested: {
+            tripleNested: {
+              type: 'color',
+              value: '{colors.accent.base.value}',
+            },
+          },
+          anotherDoubleNested: {
+            type: 'color',
+            value: '{colors.accent.secondary.value}',
+          },
+        },
+        foo: {
+          tokenset: 'foo',
+          bar: {
+            type: 'color',
+            value: '{colors.accent.light.value}',
+          },
+        },
+      };
+
+      const expectedObj = {
+        default: {
+          nested: {
+            doubleNested: {
+              tripleNested: {
+                type: 'color',
+                value: '{colors.accent.base.value}',
+              },
+            },
+            anotherDoubleNested: {
+              type: 'color',
+              value: '{colors.accent.secondary.value}',
+            },
+          },
+        },
+        foo: {
+          foo: {
+            bar: {
+              type: 'color',
+              value: '{colors.accent.light.value}',
+            },
+          },
+        },
+      };
+
+      const marked = markTokenset(obj, { defaultTokenset: 'default' });
+      expect(marked).to.eql(expectedObj);
+    });
+
+    it('supports turning off the default tokenset mapping behavior', () => {
+      const obj = {
+        nested: {
+          doubleNested: {
+            tripleNested: {
+              type: 'color',
+              value: '{colors.accent.base.value}',
+            },
+          },
+          anotherDoubleNested: {
+            type: 'color',
+            value: '{colors.accent.secondary.value}',
+          },
+        },
+        foo: {
+          tokenset: 'foo',
+          bar: {
+            type: 'color',
+            value: '{colors.accent.light.value}',
+          },
+        },
+      };
+
+      const expectedObj = {
+        nested: {
+          doubleNested: {
+            tripleNested: {
+              type: 'color',
+              value: '{colors.accent.base.value}',
+            },
+          },
+          anotherDoubleNested: {
+            type: 'color',
+            value: '{colors.accent.secondary.value}',
+          },
+        },
+        foo: {
+          foo: {
+            bar: {
+              type: 'color',
+              value: '{colors.accent.light.value}',
+            },
+          },
+        },
+      };
+
+      const marked = markTokenset(obj, { defaultTokenset: false });
+      expect(marked).to.eql(expectedObj);
+    });
   });
 });

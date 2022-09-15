@@ -15,5 +15,5 @@ import { cleanMeta } from './clean-meta.js';
  * @returns {Obj}
  */
 export function transform(obj, opts) {
-  return cleanMeta(markTokenset(trimName(useRefValue(trimValue(obj)))), opts);
+  return cleanMeta(markTokenset(trimName(useRefValue(trimValue(obj))), opts), opts);
 }
