@@ -1,3 +1,5 @@
+import { isObject } from './utils/isObject.js';
+
 /**
  * @typedef {import('./options').Options} Options
  */
@@ -10,7 +12,7 @@
  * @returns {Record<string, unknown>}
  */
 function recursiveCleanMeta(obj, keys) {
-  if (obj !== Object(obj)) {
+  if (!isObject(obj)) {
     // nothing to clean
     return obj;
   }

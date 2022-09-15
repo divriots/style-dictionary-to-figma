@@ -55,6 +55,51 @@ describe('style-dictionary-to-figma', () => {
           },
         },
       },
+      global: {
+        boxShadow: {
+          small: {
+            value: [
+              {
+                x: '0',
+                y: '1',
+                blur: '2',
+                spread: '0',
+                color: '{color.accent.base}',
+                type: 'dropShadow',
+              },
+              {
+                x: '0',
+                y: '2',
+                blur: '4',
+                spread: '0',
+                color: '{color.accent.base}',
+                type: 'dropShadow',
+              },
+            ],
+          },
+        },
+      },
+    };
+
+    const transformedObj = transform(obj);
+    expect(transformedObj).to.eql(expectedObj);
+  });
+
+  it('allows passing options to configure the transformation', () => {
+    const obj = {
+      button: {
+        tokenset: 'foo',
+        primary: {
+          bg: {
+            type: 'color',
+            original: {
+              value: '{colors.accent.base.value}',
+            },
+            name: 'ButtonPrimaryBg',
+            value: '#F8C307',
+          },
+        },
+      },
       boxShadow: {
         small: {
           value: [
@@ -63,7 +108,7 @@ describe('style-dictionary-to-figma', () => {
               y: '1',
               blur: '2',
               spread: '0',
-              color: '{color.accent.base}',
+              color: '{color.accent.base.value}',
               type: 'dropShadow',
             },
             {
@@ -71,7 +116,7 @@ describe('style-dictionary-to-figma', () => {
               y: '2',
               blur: '4',
               spread: '0',
-              color: '{color.accent.base}',
+              color: '{color.accent.base.value}',
               type: 'dropShadow',
             },
           ],
@@ -79,7 +124,44 @@ describe('style-dictionary-to-figma', () => {
       },
     };
 
-    const transformedObj = transform(obj);
+    const expectedObj = {
+      foo: {
+        button: {
+          primary: {
+            bg: {
+              type: 'color',
+              value: '{colors.accent.base}',
+            },
+          },
+        },
+      },
+      custom: {
+        boxShadow: {
+          small: {
+            value: [
+              {
+                x: '0',
+                y: '1',
+                blur: '2',
+                spread: '0',
+                color: '{color.accent.base}',
+                type: 'dropShadow',
+              },
+              {
+                x: '0',
+                y: '2',
+                blur: '4',
+                spread: '0',
+                color: '{color.accent.base}',
+                type: 'dropShadow',
+              },
+            ],
+          },
+        },
+      },
+    };
+
+    const transformedObj = transform(obj, { cleanMeta: true, defaultTokenset: 'custom' });
     expect(transformedObj).to.eql(expectedObj);
   });
 });
