@@ -26,6 +26,35 @@ function isRefValue(val) {
 }
 
 /**
+ * @param {Value} value
+ * @param {Value} originalValue
+ * @returns {Value}
+ */
+function restoreRefValue(value, originalValue) {
+  if (typeof value === 'string') {
+    return isRefValue(originalValue) ? originalValue : value;
+  }
+
+  if (typeof value === 'number') {
+    return isRefValue(originalValue) ? originalValue : value;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((val, index) =>
+      restoreRefValue(/** @type {Value} */ (val), originalValue[index]),
+    );
+  }
+
+  const newValue = { ...value };
+
+  Object.keys(newValue).forEach(key => {
+    newValue[key] = restoreRefValue(newValue[key], originalValue[key]);
+  });
+
+  return newValue;
+}
+
+/**
  * @param {Obj} obj
  * @returns {Obj}
  */
@@ -35,7 +64,10 @@ export function useRefValue(obj) {
     if (key === 'original' && !newObj.ignoreUseRefValue) {
       const originalValue = /** @type {string} */ (/** @type {Obj} */ (newObj[key]).value);
       if (isRefValue(originalValue)) {
-        newObj.value = /** @type {Obj} */ (newObj[key]).value;
+        newObj.value = restoreRefValue(
+          /** @type {Value} */ (newObj.value),
+          /** @type {Value} */ (/** @type {Obj} */ (newObj[key]).value),
+        );
       }
     } else if (isObject(newObj[key]) || Array.isArray(newObj[key])) {
       const newValue = useRefValue(/** @type {Obj} */ (newObj[key]));
