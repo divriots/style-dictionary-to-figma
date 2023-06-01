@@ -74,7 +74,7 @@ describe('trim-name', () => {
       original: {
         value: ['{shadow.core.4}', 'pre-transformed-shadow-2'],
       },
-      value: ['{shadow.core.4}', 'pre-transformed-shadow-2'],
+      value: ['{shadow.core.4}', '0 0 2px rgba(0,0,0,0.6)'],
     };
     const transformedObj2 = useRefValue(obj2);
     expect(transformedObj2).to.eql(expectedObj2);
@@ -85,7 +85,7 @@ describe('trim-name', () => {
       original: {
         value: {
           fontFamily: '{fontFamily.body}',
-          fontWeight: '{fontWeight.regular}',
+          fontWeight: '500',
           lineHeight: '{size.lineHeight.xsmall}',
           fontSize: '{size.font.xsmall}',
         },
@@ -93,7 +93,7 @@ describe('trim-name', () => {
       value: {
         fontFamily: 'Inter',
         fontWeight: 'Medium',
-        lineHeight: '1',
+        lineHeight: 1,
         fontSize: '16px',
       },
     };
@@ -101,14 +101,14 @@ describe('trim-name', () => {
       original: {
         value: {
           fontFamily: '{fontFamily.body}',
-          fontWeight: '{fontWeight.regular}',
+          fontWeight: '500',
           lineHeight: '{size.lineHeight.xsmall}',
           fontSize: '{size.font.xsmall}',
         },
       },
       value: {
         fontFamily: '{fontFamily.body}',
-        fontWeight: '{fontWeight.regular}',
+        fontWeight: 'Medium',
         lineHeight: '{size.lineHeight.xsmall}',
         fontSize: '{size.font.xsmall}',
       },
